@@ -1,11 +1,10 @@
-# Informed Consent Conversation Simulation Pipeline
+# Informed consent conversation simulation pipeline
 
 This pipeline generates **simulated patient-chatbot conversations** for informed consent based on structured patient profiles and a consent PDF using GPT models.  
-It is designed to be fully **reproducible**, **modular**, and **configurable** via CLI.
 
 ---
 
-## Folder Structure
+## Folder structure
 
 ```
 .
@@ -35,8 +34,8 @@ Before running this project, ensure you have **Conda** installed on your machine
 
 Once installed, use Conda to create and activate the required environment as described below.
 
-### Required Files (Inputs)
-1. **Consent Form PDF**  
+### Required files (inputs)
+1. **Consent form PDF**  
    You must provide a PDF file containing the informed consent documentation.  
    Example: `my_consent_form.pdf`
 
@@ -46,7 +45,7 @@ Once installed, use Conda to create and activate the required environment as des
 
 ---
 
-## Setup Instructions
+## Setup
 
 ### 1. Clone the repository (or place all `.py` files in one folder)
 
@@ -70,7 +69,7 @@ python -m ipykernel install --user --name generate_convs_env
 
 ---
 
-## How to Run
+## How to run
 
 From the terminal, **inside the project folder**, run:
 
@@ -81,7 +80,7 @@ python main.py \
   --output_file conversations_output.json
 ```
 
-### Optional Arguments
+### Optional arguments
 
 | Argument                  | Type     | Default        | Description |
 |--------------------------|----------|----------------|-------------|
@@ -102,7 +101,7 @@ python main.py \
 
 After execution, the following files will be created in the same directory:
 
-### JSON Output
+### JSON output
 
 | File                        | Description |
 |----------------------------|-------------|
