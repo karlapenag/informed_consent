@@ -27,7 +27,7 @@ This pipeline generates **simulated patient-chatbot conversations** for informed
 
 ## Requirements
 
-Before running this project, ensure you have **Conda** installed on your machine. You can install either:
+Yo need **Conda** installed on your machine. You can install either:
 
 - [Miniconda](https://docs.conda.io/en/latest/miniconda.html) 
 - [Anaconda](https://www.anaconda.com/)
@@ -60,7 +60,7 @@ conda env create -f environment.yml
 conda activate generate_convs_env
 ```
 
-For Jupyter Notebook, you can also do:
+For Jupyter notebook, you can also do:
 
 ```bash
 conda install ipykernel
