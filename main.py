@@ -12,7 +12,6 @@ from gpt_conversations import create_pretraining_dataset
 from evaluator_function_edited import save_my_analysis, METRICS
 from plotting import (
     plot_distributions,
-    plot_categorical_distributions,
     plot_top_feature_ratios_all_features
 )
 
