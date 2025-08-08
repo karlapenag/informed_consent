@@ -21,12 +21,10 @@ def _to_py(obj):
         return {k: _to_py(v) for k, v in obj.items()}
     if isinstance(obj, list):
         return [_to_py(x) for x in obj]
-    if isinstance(obj, (np.integer,)):
-        return int(obj)
-    if isinstance(obj, (np.floating,)):
-        return float(obj)
-    if isinstance(obj, (np.bool_,)):
-        return bool(obj)
+    if isinstance(obj, np.generic):     
+        return obj.item()
+    if isinstance(obj, np.ndarray):     
+        return obj.tolist()
     return obj
 
 def load_or_generate_profiles(path, build_count):
@@ -48,7 +46,7 @@ def main():
     parser = argparse.ArgumentParser(description="Generate GPT-informed consent conversations.")
 
     parser.add_argument("--profiles", type=str, help="Path to existing patient profiles")
-    parser.add_argument("--build_profiles", type=int, default=2000, help="Number of profiles to generate")
+    parser.add_argument("--build_profiles", type=int, default=20000, help="Number of profiles to generate")
     parser.add_argument("--consent_pdf", type=str, required=True, help="Path to the consent form PDF")
     parser.add_argument("--replacement", choices=["yes", "no"], default="yes", help="Replace names/PI info in PDF")
     parser.add_argument("--model", type=str, default="gpt-4o", help="OpenAI model to use (e.g., gpt-4o)")
@@ -82,6 +80,11 @@ def main():
     profiles = profiles[:args.num_conversations]
     num_episodes = len(profiles)
 
+    os.makedirs(args.output_dir, exist_ok=True)
+    # save output_file inside output_dir also
+    if not os.path.isabs(args.output_file):
+        args.output_file = os.path.join(args.output_dir, args.output_file)
+
     # generate conversations
     conversations = create_pretraining_dataset(
         num_episodes=num_episodes,
@@ -94,7 +97,6 @@ def main():
     )
 
     # post-generation analytics
-    os.makedirs(args.output_dir, exist_ok=True)
 
     def _row(conv, idx):
         prof = conv.get("profile", {})
@@ -113,7 +115,7 @@ def main():
     data_df = pd.DataFrame([_row(c, i) for i, c in enumerate(conversations)])
     raw_conversations = conversations 
 
-    print(f"Loaded {len(data_df)} conversations")
+    print(f"\nLoaded {len(data_df)} conversations")
     print(data_df[[
         "conversation_id", "patient_age", "patient_gender",
         "literacy_level", "behavior", "interest_level", "conversation_length"
@@ -179,7 +181,7 @@ def main():
 
     # Prints
     if "Patient_consented" in results_df.columns:
-        print("Unbiased Patient_consented distribution:")
+        print("\nUnbiased Patient_consented distribution:")
         print(results_df["Patient_consented"].value_counts(dropna=False))
         print(f"Consent rate: {results_df['Patient_consented'].mean():.1%}")
     
@@ -229,7 +231,6 @@ def main():
 
     # plots
     plot_distributions(profiles, os.path.join(args.output_dir, "plot_distributions.png"))
-    plot_categorical_distributions(profiles, os.path.join(args.output_dir, "plot_categorical_distributions.png"))
     plot_top_feature_ratios_all_features(
         conversations=raw_conversations,
         output_prefix=os.path.join(args.output_dir, "top5"),  # top5_consented.png and top5_no_consent.png

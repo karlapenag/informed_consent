@@ -1,5 +1,6 @@
 import fitz  # PyMuPDF
 import re
+from typing import Dict, Optional
 
 # Current replacement patterns are specific to PROMISE protocol (consent_example).
 # for more generalizable use pass a protocol-specific replacements dict to adapt automatically.

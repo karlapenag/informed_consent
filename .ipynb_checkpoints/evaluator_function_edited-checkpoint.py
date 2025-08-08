@@ -392,13 +392,11 @@ def process_conversations_to_dataset(
                 "literacy_level": profile.get("literacy_level"),
                 "behavior": profile.get("behavior"),
                 "interest_level": profile.get("interest_level"),
-                "consent_decision": conv.get("consent_decision"),   # <--- NEW
                 **score_dict
             })
 
             evidence_rows.append({
                 "conversation_id": idx, 
-                "consent_decision": conv.get("consent_decision"),   # <--- (optional) mirror here too
                 **evidence_dict})
             print(f"Processed conversation {idx}")
 
@@ -418,10 +416,9 @@ def analyze_conversation_consent_to_string(conv_id, raw_conversations, results_d
     
     # Get LLM decision
     llm_decision = results_df[results_df['conversation_id'] == conv_id]['Patient_consented'].iloc[0]
-    true_label = results_df[results_df['conversation_id'] == conv_id]['consent_decision'].iloc[0]
     
     output.append("=" * 60)
-    output.append(f"CONVERSATION {conv_id} - LLM Decision: {llm_decision} | Previous decision: {true_label}")
+    output.append(f"CONVERSATION {conv_id} - LLM Decision: {llm_decision}")
     output.append("=" * 60)
     
     # Show patient profile
@@ -498,9 +495,6 @@ def save_analysis_to_html(
     total_count   = len(conversation_ids)
     consent_count = int(results_df["Patient_consented"].sum())
     consent_rate  = consent_count / total_count if total_count else 0.0
-
-    true_yes = (results_df['consent_decision'] == "the patient consented").sum()
-    true_rate = true_yes / total_count if total_count else 0.0
 
     # ---------- compute “match” between LLM and keyword heuristic ----------
     def _llm_manual_match(cid) -> bool:
@@ -595,16 +589,6 @@ def save_analysis_to_html(
           <div class="stat-number">{consent_rate:.1%}</div>
           <div>Consent Rate</div>
         </div>
-        <!-- >>> ADDED BLOCKS <<< -->
-        <div class="stat-item">
-            <div class="stat-number">{true_yes}</div>
-            <div>Original LLM Consented</div>
-        </div>
-        <div class="stat-item">
-            <div class="stat-number">{true_rate:.1%}</div>
-            <div>Original LLM Rate</div>
-        </div>
-        <!-- >>> END ADDED BLOCKS <<< -->
         <div class="stat-item">
           <div class="stat-number">{match_count}</div>
           <div>LLM = Manual</div>

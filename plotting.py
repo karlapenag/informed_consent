@@ -6,7 +6,7 @@ from collections import defaultdict, Counter
 
 def plot_distributions(profiles, output_path="plot_distributions.png"):
     df = pd.DataFrame(profiles)
-    fields = ["literacy_level", "background_knowledge", "interest_level", "behavior"]
+    fields = ["literacy_level", "interest_level", "behavior"]
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
     for ax, field in zip(axes.flatten(), fields):
         if field in df.columns:
@@ -17,20 +17,6 @@ def plot_distributions(profiles, output_path="plot_distributions.png"):
             ax.tick_params(axis='x', rotation=45)
     plt.tight_layout()
     plt.savefig(output_path)
-
-
-def plot_categorical_distributions(profiles, output_path="plot_categorical_distributions.png"):
-    df = pd.DataFrame(profiles)
-    categorical_fields = ["literacy_level", "background_knowledge", "interest_level", "behavior"]
-    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
-    for ax, field in zip(axes.flatten(), categorical_fields):
-        if field in df.columns:
-            sns.countplot(data=df, x=field, ax=ax)
-            ax.set_title(f"Distribution of {field}")
-            ax.tick_params(axis='x', rotation=45)
-    plt.tight_layout()
-    plt.savefig(output_path)
-
 
 def plot_top_feature_ratios_all_features(
     conversations,

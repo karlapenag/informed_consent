@@ -1,10 +1,65 @@
 import random
 import numpy as np
 from scipy.stats import norm, uniform
+from typing import Dict, List, Optional
 
 # Currently implements profile generation using PROMISE protocol (consent_example) criteria.
 # Should be modified to automatically adapt to different protocols in future use.
 
+# personality dictionaries (used to enrich profiles for conversation gen)
+PATIENT_PROFILES: Dict[str, Dict[str, str]] = {
+    "high_literacy": {
+        "literacy": "high",
+        "background": "You have a college degree in biology and understand basic medical terminology."
+    },
+    "medium_literacy": {
+        "literacy": "medium",
+        "background": "You finished high school and understand some general health information, but not too familiar with medical terms or procedures."
+    },
+    "low_literacy": {
+        "literacy": "low",
+        "background": "You have limited understanding of medical procedures and terminology. Use simple language."
+    },
+}
+
+PATIENT_BEHAVIORS: Dict[str, str] = {
+    "standard": "",
+    "forgetful": (
+        "You tend to forget important details that were just explained to you. "
+        "Occasionally ask the same question more than once, or mix up information. "
+        "This will test whether the chatbot checks for understanding and corrects misunderstandings."
+    ),
+    "anxious": (
+        "You are very anxious about medical procedures and tend to focus on worst-case scenarios. "
+        "Express your fears and concerns frequently, sometimes interrupting explanations to ask about risks. "
+        "This will test if the chatbot can address emotional concerns while still providing complete information."
+    ),
+    "rushed": (
+        "You are in a hurry and want to rush through the consent process. "
+        'Try to skip detailed explanations or say things like "I just need the basics" or "Let\'s move this along." '
+        "This will test if the chatbot ensures adequate explanation despite your rush."
+    ),
+    "skeptical": (
+        "You are skeptical about medical advice and question the necessity of the procedure. "
+        "You may challenge certain claims or ask for more context and evidence about success rates and alternatives frequently. "
+        "This will test if the chatbot can provide evidence-based information and respect your autonomy."
+    ),
+    "unmotivated": (
+        "You are not very motivated to join a clinical trial. "
+        "You respond briefly and avoid engaging deeply with the information unless specifically asked. "
+        'You may say things like "I’m not sure if this is for me" or "Just tell me what I need to know." '
+        "This will test whether the chatbot can maintain engagement and ensure true understanding."
+    ),
+}
+
+INTEREST_LEVELS: Dict[str, str] = {
+    "curious": "You are curious about the trial and want to learn more, but haven’t yet decided whether to participate. You may ask exploratory questions but don’t show strong commitment.",
+    "engaged": "You actively pay attention and show consistent interest throughout the conversation. You ask clarifying questions and show signs of processing the information carefully.",
+    "passive": "You respond to questions when asked but don’t show strong engagement. You don’t ask for elaboration and seem content with brief or surface-level explanations.",
+    "distracted": "You give short or vague responses and seem disengaged. You sometimes change topics or overlook what was said in previous turns."
+}
+
+# numeric samplers
 def sample_age(gender):
     if gender == "Male":
         return random.choice(range(30, 90))
@@ -163,6 +218,19 @@ def generate_patient_profile():
     profile["exclusion_conditions"]["cardiac_arrhythmia"] = random.choice(
         ['None', 'Atrial fibrillation', 'Ventricular tachycardia']
     )
+
+    # persona enrichment
+    literacy_key = random.choice(list(PATIENT_PROFILES.keys()))
+    profile["literacy_level"] = PATIENT_PROFILES[literacy_key]["literacy"]
+    profile["background_knowledge"] = PATIENT_PROFILES[literacy_key]["background"]
+
+    behavior_key = random.choice(list(PATIENT_BEHAVIORS.keys()))
+    profile["behavior"] = behavior_key
+    profile["behavior_description"] = PATIENT_BEHAVIORS[behavior_key].strip()
+
+    interest_key = random.choice(list(INTEREST_LEVELS.keys()))
+    profile["interest_level"] = interest_key
+    profile["interest_description"] = INTEREST_LEVELS[interest_key]
 
     # check if profile is eligible (out of 20,000 only 6.25% tend to be fit_for_trial)
     profile["fit_for_trial"] = check_trial_eligibility(profile)

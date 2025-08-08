@@ -16,10 +16,12 @@ This pipeline generates **simulated patient-chatbot conversations** for informed
 ├── evaluator_function_edited.py
 ├── environment.yml
 ├── patient_profiles.json               # saved/generated profile file
-├── [output_file].json                  # GPT generated conversations
-├── output_dir              
-│   ├── plots.png                       # Output plots
-│   ├── metrics.csv                     # CSV metric outputs
+├── [output_dir]
+│   ├── [output_file].json              # GPT generated conversations          
+│   ├── plots.png                       # Output plots (3)
+│   ├── metrics.csv                     # CSV metric output
+│   ├── metrics_evidence.csv            # CSV metric evidence output
+│   ├── consent_analysis.html           # html file
 └── README.md
 ```
 
@@ -74,12 +76,14 @@ python -m ipykernel install --user --name generate_convs_env
 
 ## How to run
 
-From the terminal, **inside the project folder**, run:
+From the terminal, **inside the project folder**, example run:
 
 ```bash
 python main.py \
-  --consent_pdf my_consent_form.pdf \
-  --output_file conversations_output.json
+  --consent_pdf consent_example/Consent_PROMISE.pdf \
+  --output_file generated_convs.json \
+  --fit_only \
+  --num_conversations 5
 ```
 
 ### Optional arguments
@@ -94,14 +98,14 @@ python main.py \
 | `--model`                | string   | `gpt-4o`       | GPT model to use |
 | `--fit_only`             | flag     | `False`        | Use only profiles with `fit_for_trial = True` |
 | `--num_conversations`    | int      | `10`           | Number of conversations to generate |
-| `--max_turns`            | int      | `8`            | Max number of turns per conversation |
-| `--output_dir`           | path     | `./`           | Directory to save plots, CSVs, and reports |
+| `--max_turns`            | int      | `4`            | Max number of turns per conversation |
+| `--output_dir`           | path     | `output`           | Directory to save plots, CSVs, and reports |
 
 ---
 
 ## Outputs
 
-After execution, the following will be created in --output_dir (default: current folder):
+After execution, the following will be created in --output_dir (default: output):
 
 ### JSON output
 
@@ -113,7 +117,7 @@ Each entry in this file includes:
 - `profile`: the patient's data
 - `history`: alternating GPT turns
 - `metrics`: score for each informed consent metric
-- `consent_decision`: `the patient consented`, or `the patient did not give consent`
+- `consent_decision`: `the patient consented`, or `the patient did not consent`
 - `patient_unanswered`: whether patient left questions unanswered
 
 ---
@@ -129,7 +133,6 @@ Each entry in this file includes:
 | File                          | Description |
 |------------------------------|-------------|
 | `plot_distributions.png`     | Subplot of distributions for profile fields |
-| `plot_categorical_distributions.png` | Subplot of categorical fields |
 | `top_features_consented.png` | Top 5 features that consented |
 | `top_features_no_consent.png`| Top 5 features most associated with no consent |
 

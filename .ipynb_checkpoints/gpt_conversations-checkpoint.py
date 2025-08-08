@@ -117,12 +117,10 @@ def preprocess_for_serialization(data):
         return {k: preprocess_for_serialization(v) for k, v in data.items()}
     elif isinstance(data, list):
         return [preprocess_for_serialization(x) for x in data]
-    elif isinstance(data, np.bool_):
-        return bool(data)
-    elif isinstance(data, (np.integer, np.int_)):
-        return int(data)
-    elif isinstance(data, (np.floating, np.float_)):
-        return float(data)
+    elif isinstance(data, np.generic):
+        return data.item()
+    elif isinstance(data, np.ndarray):
+        return data.tolist()
     else:
         return data
 
@@ -303,7 +301,7 @@ def create_pretraining_dataset(num_episodes, profiles, consent_info, output_file
     for ep in range(num_episodes):
         profile = profiles[ep]
         max_turns = max_turns_cap
-        print(f"Running Episode {ep + 1}/{num_episodes}")
+        print(f"\nGenerating Conversation {ep + 1}/{num_episodes}")
         episode = generate_doctor_patient_episode(profile, consent_info, max_turns, client, model)
         dataset.append(episode)
 
