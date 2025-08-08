@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conversation Analysis</title>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; margin:20px; line-height:1.4;
+           background:#f5f5f5; }
+    .container { max-width:1200px; margin:0 auto; background:#fff; padding:20px;
+                  border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,.1); }
+    .conversation { border:2px solid #ddd; margin:20px 0; padding:15px;
+                     border-radius:8px; background:#fafafa; }
+    .match { color:#2e7d32; font-weight:bold; }
+    .mismatch { color:#c62828; font-weight:bold; }
+    .summary   { background:#e8f5e8; padding:20px; border-radius:8px;
+                  margin-bottom:30px; }
+    .stats { display:flex; justify-content:space-around; text-align:center; }
+    .stat-item { background:#fff; padding:15px; border-radius:8px;
+                  box-shadow:0 1px 3px rgba(0,0,0,.1); }
+    .stat-number { font-size:24px; font-weight:bold; color:#1565c0; }
+    pre { white-space:pre-wrap; font-size:12px;
+           font-family:'Courier New', monospace; }
+    h1 { color:#1565c0; text-align:center; border-bottom:3px solid #1565c0;
+         padding-bottom:10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Clinical Trial Informed Consent Analysis</h1>
+    <p style="text-align:center; color:#666;">
+       Generated on: 2025-08-08 01:35:59
+    </p>
+
+    <div class="summary">
+      <h2>Summary Statistics</h2>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div>Total Conversations</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1</div>
+          <div>Patients Consented</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">20.0%</div>
+          <div>Consent Rate</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4</div>
+          <div>LLM = Manual</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">80.0%</div>
+          <div>Match Rate</div>
+        </div>
+      </div>
+    </div>
+<div class="conversation"><pre>============================================================
+CONVERSATION 0 - LLM Decision: False
+============================================================
+Patient: 71 yr Female, Fit: Fit for Trial, Literacy: low, Behavior: standard, Interest: distracted
+Patient spoke 4 times
+
+LLM-supplied consent evidence:
+  Quote : "No explicit statement of willingness or agreement to participate was made by the patient."
+  Turn  : 8
+
+LAST 2 PATIENT MESSAGES:
+
+[PATIENT MSG 3]:
+I'm still a bit nervous about all this, especially with the radiation and injections involved. I know you said the risks are low, but it still makes me worry, and I'm not getting any younger. I mean, if something happens during the test—like if my chest pain gets worse or anything—it's comforting to know the medical team will be there to help.
+
+As for the cost, it's good to hear the study might cover some of it, but I’d still want to know exactly what my insurance would pick up.
+
+You mentioned not eating before the test. Does that mean I shouldn't take my diabetes medicine or my blood pressure pills in the morning of the test if I'm scheduled to go in?
+
+I guess if there's a chance these tests could really help figure out what's going on with my heart, it's worth considering. But I might need a little more time to wrap my head around the idea. Maybe I should also talk to my family doctor about it first.
+
+Would that be okay? I just want to make sure it's the right step for me.
+
+[PATIENT MSG 4]:
+Thank you, it's good to know I can take my time and talk to my family doctor about all this. I'll definitely check with my insurance too, just to make sure I understand any costs involved. The idea of not taking my morning meds worries me a bit, especially with my diabetes, so I'll really need to clarify that.
+
+It's reassuring to know the study team and medical staff will be there during the tests in case anything happens. I just have to get comfortable with the idea of the tests and the possible risks. Maybe after speaking with my doctor, I’ll feel more at ease.
+
+I'll get back to you after I have a chance to discuss it and think it over. Thank you for explaining everything and being patient with my questions.
+
+KEY PHRASES FOUND:
+Consent indicators: []
+Decline indicators: []
+Manual assessment: UNCLEAR
+LLM vs Manual: <span class="match">✅ MATCH</span></pre></div><div class="conversation"><pre>============================================================
+CONVERSATION 1 - LLM Decision: False
+============================================================
+Patient: 84 yr Female, Fit: Fit for Trial, Literacy: high, Behavior: rushed, Interest: engaged
+Patient spoke 8 times
+
+LLM-supplied consent evidence:
+  Quote : "No explicit statement of willingness or agreement to participate was made."
+  Turn  : 0
+
+LAST 2 PATIENT MESSAGES:
+
+[PATIENT MSG 7]:
+Thank you for clarifying those points once more. Understanding that there’s no financial coverage for participation and weighing that against the provision for immediate care if needed is an important balance for me to consider. It's reassuring to know that there would be close monitoring that might aid in early detection, even if there aren't direct benefits promised.
+
+Given everything we've discussed and the considerations based on my health circumstances, I feel it's crucial to have a thorough conversation with my family and healthcare provider before making a final decision.
+
+I appreciate all the information and support you've provided. I will definitely reach out to Dr. Smith or the IRB office if any more concerns arise or once I've made my decision. It's been enormously helpful, and I truly appreciate your time. Take care!
+
+[PATIENT MSG 8]:
+Thank you for reiterating those points about the lack of financial compensation and the provisions for immediate care in case of study-related injury. It's certainly a significant factor to weigh, given my health circumstances. The potential for close monitoring does offer some reassurance, though the absence of direct benefits means I'll have to think carefully about how it aligns with my current health priorities.
+
+I'll be sure to have a thorough discussion with my family and healthcare provider soon, as their perspectives will help me decide what's best for my situation. If I have more questions or decide to participate in the study, I'll reach out to Dr. Smith or the IRB office for further guidance.
+
+I appreciate the clarity and support you’ve provided throughout this conversation. It has been very helpful in understanding what participation entails. I'll take your insights into account as I make my decision. Thanks once again, and take care!
+
+KEY PHRASES FOUND:
+Consent indicators: ['participate', 'sign']
+Decline indicators: []
+Manual assessment: LIKELY CONSENTED
+LLM vs Manual: <span class="mismatch">❌ MISMATCH</span></pre></div><div class="conversation"><pre>============================================================
+CONVERSATION 2 - LLM Decision: False
+============================================================
+Patient: 71 yr Male, Fit: Fit for Trial, Literacy: medium, Behavior: skeptical, Interest: curious
+Patient spoke 6 times
+
+LLM-supplied consent evidence:
+  Quote : "No explicit statement of willingness or agreement to participate was made by the patient."
+  Turn  : 12
+
+LAST 2 PATIENT MESSAGES:
+
+[PATIENT MSG 5]:
+Thank you for clarifying what happens if I decide to withdraw from the study, especially that it won't affect my ongoing medical care for conditions like diabetes and hypertension. It's reassuring to know that I have the flexibility to opt-out without facing consequences related to my regular health management.
+
+I'm still a bit on the fence. The possibility of gaining a detailed insight into my heart health is appealing, but I'm balancing that with the potential risks and the personal benefits, especially since there's no guaranteed immediate benefit to me. However, the idea that this study could help improve future care for people in situations similar to mine is something worth considering.
+
+I think I might need a little more time to reflect on everything before making a decision. Are there any deadlines for deciding about participation, or can I take some time to think it over and discuss with my family and doctor?
+
+[PATIENT MSG 6]:
+Thank you for being understanding about my hesitation. I definitely want to talk it over with my family and doctor before making any decisions. The flexibility of no deadline helps, and knowing I can contact someone if needed is reassuring.
+
+I'll take some time to consider everything—how participating might provide valuable insights into my heart health and potentially contribute to better future care. At the same time, I'll weigh that against the risks and the fact that there's no guaranteed immediate benefit for me personally.
+
+I'll get back in touch when I've discussed this further and feel more comfortable making a decision. Thank you for all the information and for being patient with me.
+
+KEY PHRASES FOUND:
+Consent indicators: []
+Decline indicators: ['consider', 'take some time']
+Manual assessment: LIKELY DECLINED
+LLM vs Manual: <span class="match">✅ MATCH</span></pre></div><div class="conversation"><pre>============================================================
+CONVERSATION 3 - LLM Decision: True
+============================================================
+Patient: 57 yr Male, Fit: Fit for Trial, Literacy: high, Behavior: standard, Interest: passive
+Patient spoke 5 times
+
+LLM-supplied consent evidence:
+  Quote : "I'm ready to sign the consent form today and proceed with the study participation."
+  Turn  : 8
+
+LAST 2 PATIENT MESSAGES:
+
+[PATIENT MSG 4]:
+Thank you for outlining the next steps so clearly. I'm ready to sign the consent form today and proceed with the study participation. I appreciate having Dr. John A. Smith as the coordinating physician, and I'll ensure everything aligns with my current healthcare provider.
+
+I'll make sure to keep a copy of the signed consent form for my records. As of now, I don’t have any further questions, but I'll definitely reach out if any arise during the process.
+
+Let’s go ahead and get started with the necessary paperwork and scheduling the first visit. Thank you for all your help!
+
+[PATIENT MSG 5]:
+Thank you for providing the final details about compensation and handling any potential injuries. I understand that there's no monetary compensation and that the focus here is on advancing medical knowledge, which I'm happy to support. Knowing that there is immediate medical care available if needed during the study is reassuring.
+
+I'm comfortable with the information provided, and I'm ready to get started. Let's proceed with the necessary paperwork and scheduling for my first visit. Thanks again for your assistance!
+
+KEY PHRASES FOUND:
+Consent indicators: ['ready', 'proceed']
+Decline indicators: []
+Manual assessment: LIKELY CONSENTED
+LLM vs Manual: <span class="match">✅ MATCH</span></pre></div><div class="conversation"><pre>============================================================
+CONVERSATION 4 - LLM Decision: False
+============================================================
+Patient: 61 yr Male, Fit: Fit for Trial, Literacy: high, Behavior: unmotivated, Interest: passive
+Patient spoke 5 times
+
+LLM-supplied consent evidence:
+  Quote : "The patient did not explicitly state willingness to participate, only asked questions and expressed hesitation."
+  Turn  : 8
+
+LAST 2 PATIENT MESSAGES:
+
+[PATIENT MSG 4]:
+I'm feeling a bit overwhelmed by everything right now. It's helpful to know that the follow-ups are spread out and can fit into my regular schedule, which is somewhat reassuring. However, I'm still concerned about not receiving any compensation, especially considering the time and personal health risks involved. Given my high Agatston score and other risk factors, I'm not sure if participating will benefit me personally enough to outweigh the concerns. I think I need a bit more time to consider all of this and maybe talk it over with my family before making a decision. Can I get back to you later on my decision?
+
+[PATIENT MSG 5]:
+Thank you for understanding. I definitely appreciate having the contact information and the opportunity to discuss this with my family before making a commitment. Given the high Agatston score and my other risk factors, it's important for me to feel confident that whatever I choose aligns with what's best for my health. I'll review everything we've discussed and get in touch if I have any more questions or once I've made a decision. I appreciate your patience and support throughout this process.
+
+KEY PHRASES FOUND:
+Consent indicators: []
+Decline indicators: []
+Manual assessment: UNCLEAR
+LLM vs Manual: <span class="match">✅ MATCH</span></pre></div>
+  </div>
+</body>
+</html>

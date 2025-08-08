@@ -1,0 +1,6 @@
+conversation_id,patient_age,patient_gender,literacy_level,behavior,interest_level,fit_for_trial,patient_unanswered,Study_objective,Study_procedures,Study_risks,Compensation_treatment,Study_commitment,Benefits_incentive,Voluntariness,Therapeutic_misconception,Withdrawal_ability,Point_of_contact,Completeness_conciseness,Engagement,Conversational_relevance,Language_appropriateness,Avoid_attrition,Participant_time,Participant_verbosity,Patient_consented
+0,71,Female,low,standard,distracted,Fit for Trial,True,0.8,0.9,0.8,0.6,0.7,0.6,0.9,0.4,0.9,0.8,0.7,0.9,0.9,0.9,0.8,0.8,0.9,False
+1,84,Female,high,rushed,engaged,Fit for Trial,False,0.85,0.9,0.8,0.2,0.75,0.6,0.9,0.4,0.9,0.9,0.8,0.9,0.95,0.9,0.85,0.8,0.9,False
+2,71,Male,medium,skeptical,curious,Fit for Trial,False,0.9,0.9,0.9,0.4,0.9,0.6,1.0,0.8,1.0,1.0,0.8,0.9,0.9,0.9,0.8,0.9,0.8,False
+3,57,Male,high,standard,passive,Fit for Trial,False,1.0,1.0,1.0,0.8,1.0,0.9,1.0,0.9,1.0,0.9,0.8,0.9,1.0,1.0,0.9,0.9,0.9,True
+4,61,Male,high,unmotivated,passive,Fit for Trial,False,0.9,0.9,0.9,0.4,0.8,0.6,1.0,0.8,1.0,1.0,0.8,0.9,0.9,0.9,0.8,0.9,0.9,False
