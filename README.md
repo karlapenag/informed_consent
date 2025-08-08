@@ -1,4 +1,4 @@
-# Informed consent conversation simulation pipeline
+# Informed consent simulation
 
 This pipeline generates **simulated patient-chatbot conversations** for informed consent based on structured patient profiles and a consent PDF using GPT models.  
 
